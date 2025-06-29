@@ -305,6 +305,38 @@ async def ping(interaction):
 
 command_helper.add_simple_command("ping", "Test whether the bot is online!", ping)
 
+# Add bot to server command
+async def add_command(interaction):
+    embed = discord.Embed(
+        title="🤖 Add Counting Bot to Your Server",
+        description="Click the link below to invite the bot to your server!",
+        color=0x00ff00
+    )
+    
+    # You'll need to replace this with your actual bot's client ID
+    bot_id = bot.user.id if bot.user else "YOUR_BOT_ID_HERE"
+    permissions = "274877975552"  # Manage Messages, Manage Webhooks, Send Messages, Add Reactions, Pin Messages
+    
+    invite_url = f"https://discord.com/oauth2/authorize?client_id={bot_id}&permissions={permissions}&integration_type=0&scope=bot+applications.commands"
+    
+    embed.add_field(
+        name="Invite Link",
+        value=f"[Click here to add the bot]({invite_url})",
+        inline=False
+    )
+    
+    embed.add_field(
+        name="Required Permissions",
+        value="• Send Messages\n• Manage Messages\n• Manage Webhooks\n• Add Reactions\n• Pin Messages",
+        inline=False
+    )
+    
+    embed.set_footer(text="The bot needs these permissions to function properly!")
+    
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
+command_helper.add_simple_command("add", "Get the bot invite link to add it to your server", add_command)
+
 
 
 
