@@ -341,17 +341,6 @@ command_helper.add_simple_command("add", "Get the bot invite link to add it to y
 
 
 
-# Command with channel parameter
-async def channel_info_command(interaction, channel):
-    embed = discord.Embed(title=f"Channel Info: #{channel.name}", color=0x0099ff)
-    embed.add_field(name="Channel ID", value=channel.id, inline=True)
-    embed.add_field(name="Category", value=channel.category.name if channel.category else "No Category", inline=True)
-    embed.add_field(name="Created", value=channel.created_at.strftime("%Y-%m-%d"), inline=True)
-    embed.add_field(name="NSFW", value="Yes" if channel.nsfw else "No", inline=True)
-    embed.add_field(name="Topic", value=channel.topic if channel.topic else "No topic set", inline=False)
-    await interaction.response.send_message(embed=embed, ephemeral=True)
-
-command_helper.add_command_with_channel("channelinfo", "Get information about a channel", "channel", "The channel to get info about", channel_info_command)
 
 # Admin command to set count channel with webhook
 async def set_count_channel_command(interaction, channel):
